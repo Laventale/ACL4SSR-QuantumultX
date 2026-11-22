@@ -1,0 +1,48 @@
+name: Sync official ACL4SSR to Quantumult X
+
+on:
+  schedule:
+    - cron: '23 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: acl4ssr-qx-rule-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Test converter
+        run: python -m unittest discover -s tests -v
+
+      - name: Convert official rule lists
+        env:
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.event.repository.default_branch }}
+        run: python scripts/convert.py --repo "$REPO" --branch "$BRANCH"
+
+      - name: Commit only if converted rules changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add Rules/ filter_remote.snippet manifest.json conversion-warnings.txt
+          if ! git diff --cached --quiet; then
+            git commit -m 'chore: update ACL4SSR Quantumult X rules'
+            git push
+          else
+            echo 'No rule changes.'
+          fi

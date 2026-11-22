@@ -1,0 +1,9 @@
+# User private QuantX configurations / credentials: NEVER upload these.
+*.conf
+*.conf.*
+*_private*
+private/
+.env
+.DS_Store
+__pycache__/
+*.pyc
