@@ -1,0 +1,6 @@
+# Generated from ACL4SSR official: Ruleset/Sony.list
+host-suffix, playstation.com, 🎮 游戏平台
+host-suffix, playstation.net, 🎮 游戏平台
+host-suffix, playstationnetwork.com, 🎮 游戏平台
+host-suffix, sony.com, 🎮 游戏平台
+host-suffix, sonyentertainmentnetwork.com, 🎮 游戏平台

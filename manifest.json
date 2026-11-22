@@ -1,0 +1,227 @@
+{
+  "upstream": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini",
+  "template_sha256": "034bb8a638947a1d282742f9f11ea4fe7c916b6fd72805388cd0cc6e5ccc51a3",
+  "list_count": 31,
+  "rule_count": 10729,
+  "files": [
+    {
+      "path": "LocalAreaNetwork.list",
+      "policy": "🎯 全球直连",
+      "rules": 37,
+      "skipped": 0,
+      "upstream_sha256": "0789504d97d8f5b14513c529c61c06f4f862c5cfd20f7cb30bbcd38357e54468"
+    },
+    {
+      "path": "UnBan.list",
+      "policy": "🎯 全球直连",
+      "rules": 31,
+      "skipped": 0,
+      "upstream_sha256": "016837560f1f0eeb576f81600c95b547bd82e27ba27a175a3b5010de9bd18ffa"
+    },
+    {
+      "path": "BanAD.list",
+      "policy": "🛑 广告拦截",
+      "rules": 590,
+      "skipped": 0,
+      "upstream_sha256": "110117815a28fba39adcd32da1c6cf2c8b61b4a8e910ef5afdf965647bdc72a9"
+    },
+    {
+      "path": "BanProgramAD.list",
+      "policy": "🍃 应用净化",
+      "rules": 1016,
+      "skipped": 0,
+      "upstream_sha256": "35cefd7a4c01d2efa9b4c7928e21caa348f78a3f60b46d7d850f1e3334a5a766"
+    },
+    {
+      "path": "Ruleset/GoogleFCM.list",
+      "policy": "📢 谷歌FCM",
+      "rules": 44,
+      "skipped": 0,
+      "upstream_sha256": "f8dfe46062778746deba764cff47661a98ece8176a58d3e4898bdfdf87c529d9"
+    },
+    {
+      "path": "GoogleCN.list",
+      "policy": "🎯 全球直连",
+      "rules": 29,
+      "skipped": 0,
+      "upstream_sha256": "00ffcc16d0eb1898cba4f9c2cc2ce76a8f70bef7a03aea436dad79982b77c8ca"
+    },
+    {
+      "path": "Ruleset/SteamCN.list",
+      "policy": "🎯 全球直连",
+      "rules": 16,
+      "skipped": 0,
+      "upstream_sha256": "bf135f78199fbadcb663a047d70eb59ec81bead3a04cfe050036e2921c2ea607"
+    },
+    {
+      "path": "Bing.list",
+      "policy": "Ⓜ️ 微软Bing",
+      "rules": 3,
+      "skipped": 0,
+      "upstream_sha256": "b847948e128a0fc882e602c576f87334f7ebd67bbf4e6e3d25e93e28a5b1aeba"
+    },
+    {
+      "path": "OneDrive.list",
+      "policy": "Ⓜ️ 微软云盘",
+      "rules": 15,
+      "skipped": 2,
+      "upstream_sha256": "798fe9b6ed2920a7caa5b75eb44a2e41e464878ff87b38ec962cc2ec13d8be3c"
+    },
+    {
+      "path": "Microsoft.list",
+      "policy": "Ⓜ️ 微软服务",
+      "rules": 79,
+      "skipped": 0,
+      "upstream_sha256": "b502566c1b86d5512111bd4a2bb5d808eda4e36aad3009a3ca05da354c09449e"
+    },
+    {
+      "path": "Apple.list",
+      "policy": "🍎 苹果服务",
+      "rules": 29,
+      "skipped": 0,
+      "upstream_sha256": "7b2e60cd0bf3c4bfb1369890d39cc3783bdfcb016089b78acee0ff6f0d4e51c5"
+    },
+    {
+      "path": "Telegram.list",
+      "policy": "📲 电报消息",
+      "rules": 13,
+      "skipped": 0,
+      "upstream_sha256": "483f613b31a1c054ddfffa6584b449f4447944ea58b8c1fc06b67eb13c09db89"
+    },
+    {
+      "path": "Ruleset/AI.list",
+      "policy": "💬 Ai平台",
+      "rules": 55,
+      "skipped": 0,
+      "upstream_sha256": "82a8806f260c92b605f7a6abd2a0f20b79239cba4b578773b2f93151ac3e971b"
+    },
+    {
+      "path": "Ruleset/OpenAi.list",
+      "policy": "💬 Ai平台",
+      "rules": 17,
+      "skipped": 0,
+      "upstream_sha256": "3fde01190c82d9911cb247d99e941cb3b8e53c410e574240bc7d2a9227b153ab"
+    },
+    {
+      "path": "Ruleset/NetEaseMusic.list",
+      "policy": "🎶 网易音乐",
+      "rules": 37,
+      "skipped": 0,
+      "upstream_sha256": "8254e2518082103b7b3f88063562cefc3e04350b74aa411aad0ee4a66e8a9338"
+    },
+    {
+      "path": "Ruleset/Epic.list",
+      "policy": "🎮 游戏平台",
+      "rules": 6,
+      "skipped": 0,
+      "upstream_sha256": "b0118e7d13c1e4327b8208c1c932254bce9b3781079f555a65f116d6d5d9beea"
+    },
+    {
+      "path": "Ruleset/Origin.list",
+      "policy": "🎮 游戏平台",
+      "rules": 7,
+      "skipped": 0,
+      "upstream_sha256": "f8629e362757a0437696b8df896f4fee0d24c8bca166a076a2b8fa9c179542ff"
+    },
+    {
+      "path": "Ruleset/Sony.list",
+      "policy": "🎮 游戏平台",
+      "rules": 5,
+      "skipped": 0,
+      "upstream_sha256": "26cf715208bc562ba8d8e8d55c880336b5d6662b44b71418978e159148c776cb"
+    },
+    {
+      "path": "Ruleset/Steam.list",
+      "policy": "🎮 游戏平台",
+      "rules": 18,
+      "skipped": 0,
+      "upstream_sha256": "0abad0ae490ec9b7bf0cf880f83c5229949b14cc5df448c00a0516225a16b011"
+    },
+    {
+      "path": "Ruleset/Nintendo.list",
+      "policy": "🎮 游戏平台",
+      "rules": 15,
+      "skipped": 0,
+      "upstream_sha256": "9c87d2656c1b1e74494f3f9acc72a0fbb4170d3915f533f78775bd2a20b7e7d4"
+    },
+    {
+      "path": "Ruleset/YouTube.list",
+      "policy": "📹 油管视频",
+      "rules": 14,
+      "skipped": 0,
+      "upstream_sha256": "698d3112095ac6301b1f8c531da539498a2466d0f5d53f7ab8ded55ef14295bf"
+    },
+    {
+      "path": "Ruleset/Netflix.list",
+      "policy": "🎥 奈飞视频",
+      "rules": 40,
+      "skipped": 0,
+      "upstream_sha256": "f1395e46cefae2e4a57ea7ca2dd442dc98bc9204886310e401215dc70bea387c"
+    },
+    {
+      "path": "Ruleset/Bahamut.list",
+      "policy": "📺 巴哈姆特",
+      "rules": 5,
+      "skipped": 0,
+      "upstream_sha256": "b308f53b6ccdb5a1dd092fe08c7f6e1197c7168b2d1e20f1f73d5a7499540a2f"
+    },
+    {
+      "path": "Ruleset/BilibiliHMT.list",
+      "policy": "📺 哔哩哔哩",
+      "rules": 21,
+      "skipped": 0,
+      "upstream_sha256": "074d94bc66219f7a229a0ddc7150e3befb088b4fbbe3312dc3f95456b2fef96c"
+    },
+    {
+      "path": "Ruleset/Bilibili.list",
+      "policy": "📺 哔哩哔哩",
+      "rules": 21,
+      "skipped": 0,
+      "upstream_sha256": "9986f6a9365805d18d28d447d79ca2abddfb77ee5177490af979ed4bf7ce26a2"
+    },
+    {
+      "path": "ChinaMedia.list",
+      "policy": "🌏 国内媒体",
+      "rules": 38,
+      "skipped": 1,
+      "upstream_sha256": "a18ec9b9755fecb29ad2cb3ba73ad87b3d5db855d3947ef3811fd490f0904b0a"
+    },
+    {
+      "path": "ProxyMedia.list",
+      "policy": "🌍 国外媒体",
+      "rules": 305,
+      "skipped": 4,
+      "upstream_sha256": "5b6c7a07457e8a9cffd7a7a9865abfef72920b70a9ca987009710a44ccc98781"
+    },
+    {
+      "path": "ProxyGFWlist.list",
+      "policy": "🚀 节点选择",
+      "rules": 7378,
+      "skipped": 0,
+      "upstream_sha256": "537c8625e970894c5ac7420db820633817b17f493851c32af08274a7b247d5c4"
+    },
+    {
+      "path": "ChinaDomain.list",
+      "policy": "🎯 全球直连",
+      "rules": 635,
+      "skipped": 0,
+      "upstream_sha256": "362edd1f605742b360eaf138f151d7eea96cc17f20ef12da73acbfb80c350e08"
+    },
+    {
+      "path": "ChinaCompanyIp.list",
+      "policy": "🎯 全球直连",
+      "rules": 208,
+      "skipped": 0,
+      "upstream_sha256": "cbc63e3daee0c0467558394ce0cfdd342f28e6c0f903bc4b35b6a5f06279d160"
+    },
+    {
+      "path": "Download.list",
+      "policy": "🎯 全球直连",
+      "rules": 2,
+      "skipped": 20,
+      "upstream_sha256": "62b72d16b8f2bcbc80eb2c7af35dc03b31c4d82e732af6d227c2a311f04bdadc"
+    }
+  ],
+  "skipped_rules": 27,
+  "notes": "Clash-only rules not supported by QX were skipped and logged; IP-CIDR no-resolve is omitted. See conversion-warnings.txt"
+}

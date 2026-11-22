@@ -1,0 +1,6 @@
+# Generated from ACL4SSR official: Ruleset/Bahamut.list
+host, bahamut.akamaized.net, 📺 巴哈姆特
+host, gamer-cds.cdn.hinet.net, 📺 巴哈姆特
+host, gamer2-cds.cdn.hinet.net, 📺 巴哈姆特
+host-suffix, bahamut.com.tw, 📺 巴哈姆特
+host-suffix, gamer.com.tw, 📺 巴哈姆特

@@ -1,0 +1,15 @@
+# Generated from ACL4SSR official: Ruleset/YouTube.list
+host-keyword, youtube, 📹 油管视频
+host, youtubei.googleapis.com, 📹 油管视频
+host, yt3.ggpht.com, 📹 油管视频
+host-suffix, googlevideo.com, 📹 油管视频
+host-suffix, gvt2.com, 📹 油管视频
+host-suffix, withyoutube.com, 📹 油管视频
+host-suffix, youtu.be, 📹 油管视频
+host-suffix, youtube-nocookie.com, 📹 油管视频
+host-suffix, youtube.com, 📹 油管视频
+host-suffix, youtubeeducation.com, 📹 油管视频
+host-suffix, youtubegaming.com, 📹 油管视频
+host-suffix, youtubekids.com, 📹 油管视频
+host-suffix, yt.be, 📹 油管视频
+host-suffix, ytimg.com, 📹 油管视频

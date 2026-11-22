@@ -1,0 +1,8 @@
+# Generated from ACL4SSR official: Ruleset/Origin.list
+host, cloudsync-prod.s3.amazonaws.com, 🎮 游戏平台
+host, eaasserts-a.akamaihd.net, 🎮 游戏平台
+host, origin-a.akamaihd.net, 🎮 游戏平台
+host, originasserts.akamaized.net, 🎮 游戏平台
+host, rtm.tnt-ea.com, 🎮 游戏平台
+host-suffix, ea.com, 🎮 游戏平台
+host-suffix, origin.com, 🎮 游戏平台
