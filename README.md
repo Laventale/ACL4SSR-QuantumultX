@@ -56,10 +56,11 @@ python scripts/patch_conf.py my_private.conf filter_remote.snippet
 
 - 只允许请求 ACL4SSR 官方仓库的 `Clash/` 路径。
 - 读取官方 `ACL4SSR_Online_Full.ini` 中 **有效（非注释）的 ruleset=**，不擅自启用注释掉的 `ChinaIp.list`。
-- 支持：`DOMAIN`、`DOMAIN-SUFFIX`、`DOMAIN-KEYWORD`、`DOMAIN-WILDCARD`、`IP-CIDR`、`IP-CIDR6`、`IP-ASN`、`GEOIP`。
+- 支持：`DOMAIN`、`DOMAIN-SUFFIX`、`DOMAIN-KEYWORD`、`DOMAIN-WILDCARD`、`IP-CIDR`、`IP-CIDR6`、`IP-ASN`、`GEOIP`、`USER-AGENT`。
+- Clash 独有且无法安全等价转换的 `PROCESS-NAME`、`PROCESS-PATH`、`URL-REGEX` 等规则**跳过并逐条记录原因**到 `conversion-warnings.txt`。如规则文件全部为不兼容类型，整次同步仍然失败，防止发布空规则集。
 - 针对带 `*` 或 `?` 的域名转换为 `host-wildcard`，避免 `host-suffix, *2.example.com` 无法解析。
 - 仅在有 `no-resolve` 的 IP/CIDR 规则上**移除此修饰符并输出警告**。这会存在细微语义差异；对精确 DNS 行为敏感时请查看 `conversion-warnings.txt`。
-- 出现未知语法/意外格式、拉取失败、文件数量异常、转换后空文件时，**整个任务失败而不提交**，GitHub 上保留上次有效文件。
+- 出现**不在显式跳过列表内**的未知语法/意外格式、拉取失败、文件数量异常、转换后空文件时，**整个任务失败而不提交**，GitHub 上保留上次有效文件。
 - 每次生成 `manifest.json`（来源、策略组、规则数量、SHA256），便于审计；脚本没有生成时间戳以免每天无意义提交。
 - 上游规则采用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)；再发布时注意署名与相同方式共享许可。
 

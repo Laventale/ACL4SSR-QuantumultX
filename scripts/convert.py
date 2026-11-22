@@ -24,7 +24,19 @@ from urllib.parse import urlparse
 
 RAW_PREFIX = "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/"
 TEMPLATE_URL = RAW_PREFIX + "config/ACL4SSR_Online_Full.ini"
-SUPPORTED_RULES = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "DOMAIN-WILDCARD", "IP-CIDR", "IP-CIDR6", "IP-ASN", "GEOIP"}
+SUPPORTED_RULES = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "DOMAIN-WILDCARD", "IP-CIDR", "IP-CIDR6", "IP-ASN", "GEOIP", "USER-AGENT"}
+# ACL4SSR sources are written for Clash. These rule types do not have a safe,
+# equivalent Quantumult X filter rule. Never invent a broader matching rule.
+# Skips are recorded in conversion-warnings.txt; all OTHER unknown types fail.
+UNSUPPORTED_QX_RULES = {
+    "PROCESS-NAME": "Quantumult X cannot match a process by name",
+    "PROCESS-PATH": "Quantumult X cannot match a process path",
+    "URL-REGEX": "Quantumult X filter rules cannot match a full URL regular expression",
+    "DOMAIN-REGEX": "no proven equivalent Quantumult X domain regex rule",
+    "SRC-IP-CIDR": "no proven equivalent source-IP filter rule",
+    "SRC-PORT": "no proven equivalent source-port filter rule",
+    "DST-PORT": "no proven equivalent destination-port filter rule",
+}
 DEFAULT_TIMEOUT = 35
 
 
@@ -102,7 +114,7 @@ def validate_pattern(text: str, wildcard: bool) -> None:
         raise ConversionError(f"Unknown domain pattern characters: {text!r}")
 
 
-def convert_line(line: str, source: str, index: int) -> tuple[str, str | None] | None:
+def convert_line(line: str, source: str, index: int) -> tuple[str | None, str | None] | None:
     value = line.strip()
     if not value or value.startswith(("#", ";", "//")):
         return None
@@ -112,11 +124,20 @@ def convert_line(line: str, source: str, index: int) -> tuple[str, str | None] |
         raise ConversionError(f"{source}:{index}: invalid Clash rule: {line}")
     kind, target = fields[0].upper(), fields[1]
     extra = fields[2:]
+    if kind in UNSUPPORTED_QX_RULES:
+        # Do not convert PROCESS-NAME to a domain rule: that would change the
+        # meaning and could route much more traffic than the upstream intended.
+        reason = UNSUPPORTED_QX_RULES[kind]
+        return None, f"{source}:{index}: SKIPPED {kind} ({reason}): {line}"
     if kind not in SUPPORTED_RULES:
-        raise ConversionError(f"{source}:{index}: unsupported rule type {kind!r}: {line}")
+        raise ConversionError(f"{source}:{index}: unknown rule type {kind!r}: {line}")
     if any(x.lower() != "no-resolve" for x in extra):
         raise ConversionError(f"{source}:{index}: unsupported rule modifiers: {line}")
     warning = None
+    if kind == "USER-AGENT":
+        if not target or any(ch in target for ch in ("\r", "\n", ",")) or extra:
+            raise ConversionError(f"{source}:{index}: invalid USER-AGENT: {line}")
+        return f"user-agent, {target}", None
     if kind in ("DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "DOMAIN-WILDCARD"):
         if extra:
             raise ConversionError(f"{source}:{index}: unexpected modifier on domain: {line}")
@@ -164,11 +185,12 @@ def convert_list(source_text: str, name: str) -> tuple[list[str], list[str]]:
         if result is None:
             continue
         rule, warning = result
-        converted.append(rule)
+        if rule is not None:
+            converted.append(rule)
         if warning:
             warnings.append(warning)
     if not converted:
-        raise ConversionError(f"Empty output for {name}")
+        raise ConversionError(f"No compatible Quantumult X rules remain in {name}; refusing to publish an empty list")
     return converted, warnings
 
 
@@ -210,14 +232,17 @@ def run(root: Path, repo: str, branch: str, template_url: str = TEMPLATE_URL) ->
         # Three-field rules work as standalone rule lists too.
         output += "\n".join(f"{rule}, {source.group}" for rule in converted) + "\n"
         all_outputs[source.relative] = output
+        skipped = sum("SKIPPED " in warning for warning in local_warnings)
         meta.append({"path": str(source.relative), "policy": source.group,
-                     "rules": len(converted), "upstream_sha256": hashlib.sha256(original.encode()).hexdigest()})
+                     "rules": len(converted), "skipped": skipped,
+                     "upstream_sha256": hashlib.sha256(original.encode()).hexdigest()})
     if grand_total < 1000:
         raise ConversionError(f"Too few rules ({grand_total}); refusing to publish")
     snippet = make_remote_snippet(sources, repo, branch)
     manifest = {"upstream": TEMPLATE_URL, "template_sha256": hashlib.sha256(original_template.encode()).hexdigest(),
                 "list_count": len(sources), "rule_count": grand_total, "files": meta,
-                "notes": "IP-CIDR no-resolve was omitted when present; see conversion-warnings.txt"}
+                "skipped_rules": sum(item["skipped"] for item in meta),
+                "notes": "Clash-only rules not supported by QX were skipped and logged; IP-CIDR no-resolve is omitted. See conversion-warnings.txt"}
     # Stage all outputs, then copy only after successful conversion of every source.
     with tempfile.TemporaryDirectory(prefix="acl4ssr-stage-") as tmp:
         stage = Path(tmp)
